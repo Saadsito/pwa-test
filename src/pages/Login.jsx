@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Logo from '../assets/logozuli.png';
 
 function Copyright(props) {
   return (
@@ -40,9 +41,7 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
-            Logo
-          </Typography>
+          <img src={Logo} style={{width: '100pt', height: '100pt'}}/>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -67,10 +66,11 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              style={{height: '40pt'}}
             >
               Iniciar sesión
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent="center">
               <Grid item >
                 <Link href="/signup" variant="body2" color="#000">
                   {"¿Aún no estás registrado? Regístrate aquí"}

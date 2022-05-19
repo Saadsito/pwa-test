@@ -1,0 +1,12 @@
+.image-avatar{
+    width: 100pt;
+    height: 100pt;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.image-avatar-selected{
+    width: 100pt;
+    height: 100pt;
+    transition: all .5s;
+}
