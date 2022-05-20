@@ -152,8 +152,8 @@ export default function SignUp() {
               Elige a tu avatar
             </Typography>
             <div style={{marginTop: '20pt'}}>
-              <img src={Avatar1} className={avtr1} onClick={() => mic.start()}/>
-              <img src={Avatar2} className={avtr2} onClick={() => mic.stop()}/>
+              <img src={Avatar1} className={avtr1} onClick={() => avatarClick(1)}/>
+              <img src={Avatar2} className={avtr2} onClick={() => avatarClick(2)}/>
               <img src={Avatar3} className={avtr3} onClick={() => avatarClick(3)}/>
               <img src={Avatar4} className={avtr4} onClick={() => avatarClick(4)}/>
               <img src={Avatar5} className={avtr5} onClick={() => avatarClick(5)}/>
