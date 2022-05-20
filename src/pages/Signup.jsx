@@ -17,6 +17,7 @@ import Avatar6 from '../assets/avatar6.jpeg';
 import Avatar7 from '../assets/avatar7.jpeg';
 import Avatar8 from '../assets/avatar8.jpeg';
 import Voice from '../components/Voice';
+import useRecorder from '../states/useRecorder';
 
 function Copyright(props) {
   return (
@@ -162,7 +163,7 @@ export default function SignUp() {
               <img src={Avatar8} className={avtr8} onClick={() => avatarClick(8)}/>
             </div>
             <div>
-              <Voice/>
+              <useRecorder/>
             </div>
             <Button
               type="submit"

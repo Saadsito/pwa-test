@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-function generateKey() {
+const generateKey = () => {
   return uuid();
 }
 

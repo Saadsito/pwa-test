@@ -1,7 +1,7 @@
-export function formatMinutes(minutes) {
+export const formatMinutes = (minutes) => {
   return minutes < 10 ? `0${minutes}` : minutes;
 }
 
-export function formatSeconds(seconds) {
+export const formatSeconds = (seconds) => {
   return seconds < 10 ? `0${seconds}` : seconds;
 }
