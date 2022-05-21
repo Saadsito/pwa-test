@@ -1,19 +1,26 @@
-import React, { useState } from "react";
-import RecorderControls from "./RecorderControls/RecorderControls";
+import React, { useState } from 'react';
+import RecorderControls from './RecorderControls/RecorderControls';
 import useRecorder from '../states/useRecorder';
 import Typography from '@mui/material/Typography';
+import RecordingsList from './RecordingList';
 
-export default function Voice(props) {
-
+const Voice = (props) => {
   const { recorderState, ...handlers } = useRecorder();
   const { audio } = recorderState;
 
   return (
     <div>
-      <Typography component="h3" variant="h6" style={{marginBottom: '5pt', color: '#fff'}}>
+      <Typography
+        component="h3"
+        variant="h6"
+        style={{ marginBottom: '5pt', color: '#fff' }}
+      >
         {props.title}
       </Typography>
-      <RecorderControls recorderState={recorderState} handlers={handlers}/>
+      {/* <RecorderControls recorderState={recorderState} handlers={handlers} /> */}
+      {/* <RecordingsList audio={audio} /> */}
     </div>
   );
-}
+};
+
+export default Voice;

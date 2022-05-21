@@ -1,9 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SignUp from './pages/Signup';
+import Voice from './components/Voice';
 
 const theme = createTheme({
   palette: {
@@ -17,14 +18,14 @@ const theme = createTheme({
 });
 
 function App() {
-
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
-            <Route exact path="/login" element={<Login/>}/>
-            <Route exact path="/signup" element={<SignUp/>}/>
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/" element={<Voice title="ola" />} />
           </Routes>
         </Router>
       </ThemeProvider>
