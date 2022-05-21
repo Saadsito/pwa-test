@@ -17,8 +17,8 @@ const Voice = (props) => {
       >
         {props.title}
       </Typography>
-      {/* <RecorderControls recorderState={recorderState} handlers={handlers} /> */}
-      {/* <RecordingsList audio={audio} /> */}
+      <RecorderControls recorderState={recorderState} handlers={handlers} />
+      <RecordingsList audio={audio} />
     </div>
   );
 };

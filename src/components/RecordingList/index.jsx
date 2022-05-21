@@ -33,12 +33,7 @@ export default function RecordingsList({ audio }) {
         </>
       ) : (
         <div className="no-records">
-          <FontAwesomeIcon
-            icon={faExclamationCircle}
-            size="2x"
-            color="#f2ea02"
-          />
-          <span>You don't have records</span>
+          
         </div>
       )}
     </div>
