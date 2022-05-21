@@ -16,7 +16,7 @@ import Avatar5 from '../assets/avatar5.jpeg';
 import Avatar6 from '../assets/avatar6.jpeg';
 import Avatar7 from '../assets/avatar7.jpeg';
 import Avatar8 from '../assets/avatar8.jpeg';
-import Voice from '../components/Voice';
+import RecorderControls from "../components/RecorderControls/RecorderControls";
 import useRecorder from '../states/useRecorder';
 
 function Copyright(props) {
@@ -29,11 +29,10 @@ function Copyright(props) {
 
 export default function SignUp() {
 
-  let avatarSelected = 0;
+  const { recorderState, ...handlers } = useRecorder();
+  const { audio } = recorderState;
 
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition
-  const mic = new SpeechRecognition()
+  let avatarSelected = 0;
 
   const [avtr1, setAvtr1] = useState("image-avatar");
   const [avtr2, setAvtr2] = useState("image-avatar");
@@ -163,7 +162,7 @@ export default function SignUp() {
               <img src={Avatar8} className={avtr8} onClick={() => avatarClick(8)}/>
             </div>
             <div>
-              <useRecorder/>
+              <RecorderControls recorderState={recorderState} handlers={handlers}/>
             </div>
             <Button
               type="submit"
