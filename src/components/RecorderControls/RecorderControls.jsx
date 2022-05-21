@@ -1,6 +1,10 @@
 import React from 'react';
 import { formatMinutes, formatSeconds } from '../../utils/format-time';
 import './styles.css';
+import MicIcon from '@mui/icons-material/Mic';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Typography } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
 
 export default function RecorderControls({ recorderState, handlers }) {
   const { recordingMinutes, recordingSeconds, initRecording } = recorderState;
@@ -11,18 +15,18 @@ export default function RecorderControls({ recorderState, handlers }) {
       <div className="recorder-display">
         <div className="recording-time">
           {initRecording && <div className="recording-indicator"></div>}
-          <span>{formatMinutes(recordingMinutes)}</span>
-          <span>:</span>
-          <span>{formatSeconds(recordingSeconds)}</span>
+          <Typography component="h3" variant="h5">{formatMinutes(recordingMinutes)}</Typography>
+          <Typography component="h3" variant="h5">:</Typography>
+          <Typography component="h3" variant="h5">{formatSeconds(recordingSeconds)}</Typography>
         </div>
         {initRecording && (
           <div className="cancel-button-container">
             <button
               className="cancel-button"
-              title="Cancel recording"
+              title="Cancelar grabación"
               onClick={cancelRecording}
             >
-              Cancelar
+              <DeleteIcon className='iconDelete'/>
             </button>
           </div>
         )}
@@ -31,19 +35,19 @@ export default function RecorderControls({ recorderState, handlers }) {
         {initRecording ? (
           <button
             className="start-button"
-            title="Save recording"
+            title="Guardar grabación"
             disabled={recordingSeconds === 0}
             onClick={saveRecording}
           >
-            Guardar
+            <CheckIcon className='iconPink'/>
           </button>
         ) : (
           <button
             className="start-button"
-            title="Start recording"
+            title="Empezar a grabar"
             onClick={startRecording}
           >
-            Grabar
+            <MicIcon className='iconPink'/>
           </button>
         )}
       </div>

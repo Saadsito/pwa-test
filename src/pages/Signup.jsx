@@ -16,8 +16,8 @@ import Avatar5 from '../assets/avatar5.jpeg';
 import Avatar6 from '../assets/avatar6.jpeg';
 import Avatar7 from '../assets/avatar7.jpeg';
 import Avatar8 from '../assets/avatar8.jpeg';
-import RecorderControls from "../components/RecorderControls/RecorderControls";
-import useRecorder from '../states/useRecorder';
+import {ReactComponent as RecordingSVG} from "../assets/recording.svg";
+import Voice from "../components/Voice";
 
 function Copyright(props) {
   return (
@@ -28,11 +28,6 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
-
-  const { recorderState, ...handlers } = useRecorder();
-  const { audio } = recorderState;
-
-  let avatarSelected = 0;
 
   const [avtr1, setAvtr1] = useState("image-avatar");
   const [avtr2, setAvtr2] = useState("image-avatar");
@@ -53,7 +48,6 @@ export default function SignUp() {
   };
 
   const avatarClick = (avtrNumber) => {
-    avatarSelected = avtrNumber;
     setAvtr1("image-avatar");
     setAvtr2("image-avatar");
     setAvtr3("image-avatar");
@@ -162,7 +156,34 @@ export default function SignUp() {
               <img src={Avatar8} className={avtr8} onClick={() => avatarClick(8)}/>
             </div>
             <div>
-              <RecorderControls recorderState={recorderState} handlers={handlers}/>
+              <Typography component="h3" variant="h6" className="margin-title">
+                Grábate respondiendo a las siguientes sentencias como si fuera tu familiar el que te está hablando 
+              </Typography>
+              <RecordingSVG className="record-svg"/>
+            </div>
+            <div className="sentence-section">
+              <Voice title={"Hola"}/>
+            </div>
+            <div className="sentence-section">
+              <Voice title={"¿Cómo estás?"}/>
+            </div>
+            <div className="sentence-section">
+             <Voice title={"Buenos días"}/>
+            </div>
+            <div className="sentence-section">
+              <Voice title={"Buenas tardes"}/>
+            </div>
+            <div className="sentence-section">
+              <Voice title={"Buenas noches"}/>
+            </div>
+            <div className="sentence-section">
+              <Voice title={"¿Cómo estuvo tu día?"}/>
+            </div>
+            <div className="sentence-section">
+              <Voice title={"Te extraño"}/>
+            </div>
+            <div className="sentence-section">
+              <Voice title={"¿Ya comiste?"}/>
             </div>
             <Button
               type="submit"

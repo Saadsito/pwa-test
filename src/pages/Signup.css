@@ -12,3 +12,25 @@
     transition: all .5s;
     cursor: pointer;
 }
+
+.record-svg{
+    width: 200pt;
+    height: 200pt;
+    margin-top: 10pt;
+    margin-bottom: 20pt;
+}
+
+.sentence-section{
+    margin-bottom: 20pt;
+    margin-top: 10pt;
+    background-color: #FFDFF4;
+    margin-left: 20pt;
+    margin-right: 20pt;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+.margin-title{
+    margin-top: 20pt;
+}

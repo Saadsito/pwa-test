@@ -26,7 +26,7 @@
   height: 10px;
   margin-right: 0.5rem;
   border-radius: 50%;
-  background-color: #099fff;
+  background-color: #F7359D;
   animation-name: animated-block;
   animation-duration: 2s;
   animation-iteration-count: infinite;
@@ -50,13 +50,10 @@
 .start-button,
 .cancel-button {
   border: none;
-  border-radius: 50%;
-  background-color: #fff;
+  background-color: transparent;
   cursor: pointer;
-}
-
-.cancel-button:hover {
-  color: #fd1c03;
+  color: #282828;
+  margin-top: 2pt;
 }
 
 .cancel-button {
@@ -68,11 +65,12 @@
   width: 15%;
   display: grid;
   place-content: center;
+  margin-right: 20pt;
 }
 
-.start-button:hover {
-  color: #41295a;
-  background-color: #f2ea02;
+.iconPink{
+  color: #F7359D;
+  margin-top: 2pt;
 }
 
 .start-button {
