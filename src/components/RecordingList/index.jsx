@@ -1,10 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faTrashAlt,
-  faExclamationCircle,
-} from '@fortawesome/free-solid-svg-icons';
 import useRecordingsList from '../../states/useRecordingLists';
 import './styles.css';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function RecordingsList({ audio }) {
   const { recordings, deleteAudio } = useRecordingsList(audio);
@@ -13,7 +10,6 @@ export default function RecordingsList({ audio }) {
     <div className="recordings-container">
       {recordings.length > 0 ? (
         <>
-          <h1>Your recordings</h1>
           <div className="recordings-list">
             {recordings.map((record) => (
               <div className="record" key={record.key}>
@@ -24,7 +20,7 @@ export default function RecordingsList({ audio }) {
                     title="Delete this audio"
                     onClick={() => deleteAudio(record.key)}
                   >
-                    <FontAwesomeIcon icon={faTrashAlt} />
+                    <DeleteIcon style={{color: '#fff'}} />
                   </button>
                 </div>
               </div>
@@ -33,7 +29,7 @@ export default function RecordingsList({ audio }) {
         </>
       ) : (
         <div className="no-records">
-          
+
         </div>
       )}
     </div>

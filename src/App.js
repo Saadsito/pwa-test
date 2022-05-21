@@ -24,8 +24,7 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/login" element={<Login />} />
-            <Route exact path="/signup" element={<SignUp />} />
-            <Route exact path="/" element={<Voice title="ola" />} />
+            <Route exact path="/signup" element={<SignUp />} /> 
           </Routes>
         </Router>
       </ThemeProvider>
