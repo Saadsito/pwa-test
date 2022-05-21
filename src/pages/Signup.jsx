@@ -156,7 +156,7 @@ export default function SignUp() {
               <img src={Avatar8} className={avtr8} onClick={() => avatarClick(8)}/>
             </div>
             <div>
-              <Typography component="h3" variant="h6" className="margin-title">
+              <Typography component="h3" variant="h6" style={{marginTop: '20pt'}}>
                 Grábate respondiendo a las siguientes sentencias como si fuera tu familiar el que te está hablando 
               </Typography>
               <RecordingSVG className="record-svg"/>
@@ -183,7 +183,7 @@ export default function SignUp() {
               <Voice title={"Te extraño"}/>
             </div>
             <div className="sentence-section">
-              <Voice title={"¿Ya comiste?"}/>
+              <Voice title={"¿Ya comiste"}/>
             </div>
             <Button
               type="submit"
