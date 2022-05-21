@@ -10,7 +10,7 @@ export default function Voice(props) {
 
   return (
     <div>
-      <Typography component="h3" variant="h6" style={{marginBottom: '5pt'}}>
+      <Typography component="h3" variant="h6" style={{marginBottom: '5pt', color: '#fff'}}>
         {props.title}
       </Typography>
       <RecorderControls recorderState={recorderState} handlers={handlers}/>
