@@ -29,6 +29,16 @@ function Copyright(props) {
 
 export default function SignUp() {
 
+  const dataUser = {
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    avatar: "",
+  };
+
+  const [user, setUser] = useState(dataUser);
+
   const [avtr1, setAvtr1] = useState("image-avatar");
   const [avtr2, setAvtr2] = useState("image-avatar");
   const [avtr3, setAvtr3] = useState("image-avatar");
@@ -48,6 +58,10 @@ export default function SignUp() {
   const [audio8, setAudio8] = useState(null);
 
 
+  const changeValue = (property, value) => {
+    setUser({ ...user, [property]: value });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -66,6 +80,7 @@ export default function SignUp() {
     setAvtr6("image-avatar");
     setAvtr7("image-avatar");
     setAvtr8("image-avatar");
+    changeValue("avatar", avtrNumber);
     switch (avtrNumber) {
       case 1:
         setAvtr1("image-avatar-selected");
@@ -121,6 +136,7 @@ export default function SignUp() {
                   id="firstName"
                   label="Nombre"
                   autoFocus
+                  onChange={(e) => changeValue("name", e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -130,6 +146,7 @@ export default function SignUp() {
                   label="Apellido"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={(e) => changeValue("lastname", e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -139,6 +156,7 @@ export default function SignUp() {
                   label="Email"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => changeValue("email", e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -149,6 +167,7 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={(e) => changeValue("password", e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -202,6 +221,7 @@ export default function SignUp() {
               sx={{ mt: 3, mb: 2 }}
               style={{height: '40pt'}}
               color="secondary"
+              onClick={() => console.log(user)}
             >
               Regístrate
             </Button>
