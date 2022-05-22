@@ -67,6 +67,7 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               style={{height: '40pt'}}
+              color="secondary"
             >
               Iniciar sesión
             </Button>

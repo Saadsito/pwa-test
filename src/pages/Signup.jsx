@@ -38,6 +38,16 @@ export default function SignUp() {
   const [avtr7, setAvtr7] = useState("image-avatar");
   const [avtr8, setAvtr8] = useState("image-avatar");
 
+  const [audio1, setAudio1] = useState(null);
+  const [audio2, setAudio2] = useState(null);
+  const [audio3, setAudio3] = useState(null);
+  const [audio4, setAudio4] = useState(null);
+  const [audio5, setAudio5] = useState(null);
+  const [audio6, setAudio6] = useState(null);
+  const [audio7, setAudio7] = useState(null);
+  const [audio8, setAudio8] = useState(null);
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -162,28 +172,28 @@ export default function SignUp() {
               <RecordingSVG className="record-svg"/>
             </div>
             <div className="sentence-section">
-              <Voice title={"Hola"}/>
+              <Voice setAudio={setAudio1} title={"Hola"}/>
             </div>
             <div className="sentence-section">
-              <Voice title={"¿Cómo estás?"}/>
+              <Voice setAudio={setAudio2} title={"¿Cómo estás?"}/>
             </div>
             <div className="sentence-section">
-             <Voice title={"Buenos días"}/>
+             <Voice setAudio={setAudio3} title={"Buenos días"}/>
             </div>
             <div className="sentence-section">
-              <Voice title={"Buenas tardes"}/>
+              <Voice setAudio={setAudio4} title={"Buenas tardes"}/>
             </div>
             <div className="sentence-section">
-              <Voice title={"Buenas noches"}/>
+              <Voice setAudio={setAudio5} title={"Buenas noches"}/>
             </div>
             <div className="sentence-section">
-              <Voice title={"¿Cómo estuvo tu día?"}/>
+              <Voice setAudio={setAudio6} title={"¿Cómo estuvo tu día?"}/>
             </div>
             <div className="sentence-section">
-              <Voice title={"Te extraño"}/>
+              <Voice setAudio={setAudio7} title={"Te extraño"}/>
             </div>
             <div className="sentence-section">
-              <Voice title={"¿Ya comiste"}/>
+              <Voice setAudio={setAudio8} title={"¿Ya comiste"}/>
             </div>
             <Button
               type="submit"
@@ -191,6 +201,7 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               style={{height: '40pt'}}
+              color="secondary"
             >
               Regístrate
             </Button>
