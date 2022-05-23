@@ -20,7 +20,8 @@ import {ReactComponent as RecordingSVG} from "../assets/recording.svg";
 import Voice from "../components/Voice";
 import { createUserWithEmailAndPassword, getAuth } from "@firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { db } from '../firebase/config';
+import { db, storage } from '../firebase/config';
+import { ref, uploadBytes } from "firebase/storage";
 
 function Copyright(props) {
   return (
@@ -73,16 +74,29 @@ export default function SignUp() {
     });
     const auth = getAuth();
     try {
-      const newUser = await createUserWithEmailAndPassword(auth, user.email, user.password);
-      console.log("Usuario creado con exito: ", newUser);
-      
-      console.log("uid: ",  auth.currentUser.uid);
+      //autenticacion de usuario
+      await createUserWithEmailAndPassword(auth, user.email, user.password);      
+      console.log("Usuario creado con exito: ",  auth.currentUser.uid);
+
+      //guardar informacion en firestore
       const users = collection(db, "dataUser");
       await setDoc(doc(users), {
         UID: auth.currentUser.uid,
         name: user.name,
         lastname: user.lastname,
         avatar: user.avatar });
+
+      //guardar audios
+      const storageRef = ref(storage, auth.currentUser.uid);
+      await uploadBytes(storageRef, audio1);
+      await uploadBytes(storageRef, audio2);
+      await uploadBytes(storageRef, audio3);
+      await uploadBytes(storageRef, audio4);
+      await uploadBytes(storageRef, audio5);
+      await uploadBytes(storageRef, audio6);
+      await uploadBytes(storageRef, audio7);
+      await uploadBytes(storageRef, audio8);
+      console.log("audios guardados con éxito");
     } catch (e)
     {
       console.log(e);
@@ -239,7 +253,6 @@ export default function SignUp() {
               sx={{ mt: 3, mb: 2 }}
               style={{height: '40pt'}}
               color="secondary"
-              onClick={() => console.log(user)}
             >
               Regístrate
             </Button>
