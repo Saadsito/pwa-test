@@ -18,6 +18,9 @@ import Avatar7 from '../assets/avatar7.jpeg';
 import Avatar8 from '../assets/avatar8.jpeg';
 import {ReactComponent as RecordingSVG} from "../assets/recording.svg";
 import Voice from "../components/Voice";
+import { app } from '../firebase/config';
+import 'firebase/compat/auth';
+import { createUserWithEmailAndPassword, getAuth } from "@firebase/auth";
 
 function Copyright(props) {
   return (
@@ -66,9 +69,13 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      user
     });
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, user.email, user.password)
+    .then((userCredential)=>{
+      console.log("Usuario creado con exito: ", userCredential);
+    })
   };
 
   const avatarClick = (avtrNumber) => {
