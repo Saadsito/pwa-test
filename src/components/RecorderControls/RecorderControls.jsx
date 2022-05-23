@@ -21,34 +21,15 @@ export default function RecorderControls({ recorderState, handlers }) {
         </div>
         {initRecording && (
           <div className="cancel-button-container">
-            <button
-              className="cancel-button"
-              title="Cancelar grabación"
-              onClick={cancelRecording}
-            >
-              <DeleteIcon className='iconDelete'/>
-            </button>
+              <DeleteIcon className='iconColor' onClick={cancelRecording}/>
           </div>
         )}
       </div>
       <div className="start-button-container">
         {initRecording ? (
-          <button
-            className="start-button"
-            title="Guardar grabación"
-            disabled={recordingSeconds === 0}
-            onClick={saveRecording}
-          >
-            <CheckIcon className='iconPink'/>
-          </button>
+            <CheckIcon className='iconColor' onClick={saveRecording}/>
         ) : (
-          <button
-            className="start-button"
-            title="Empezar a grabar"
-            onClick={startRecording}
-          >
-            <MicIcon className='iconPink'/>
-          </button>
+            <MicIcon className='iconColor' onClick={startRecording}/>
         )}
       </div>
     </div>
