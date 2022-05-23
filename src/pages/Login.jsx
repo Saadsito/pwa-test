@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Logo from '../assets/logozuli.png';
+import { signInWithEmailAndPassword, getAuth } from "@firebase/auth";
 
 function Copyright(props) {
   return (
@@ -27,6 +28,11 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, data.get('email'), data.get('password'))
+    .then((userCredential)=>{
+      console.log("Sesion iniciada con: ", userCredential);
+    })
   };
 
   return (

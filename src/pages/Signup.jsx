@@ -18,8 +18,6 @@ import Avatar7 from '../assets/avatar7.jpeg';
 import Avatar8 from '../assets/avatar8.jpeg';
 import {ReactComponent as RecordingSVG} from "../assets/recording.svg";
 import Voice from "../components/Voice";
-import { app } from '../firebase/config';
-import 'firebase/compat/auth';
 import { createUserWithEmailAndPassword, getAuth } from "@firebase/auth";
 
 function Copyright(props) {
