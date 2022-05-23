@@ -19,6 +19,8 @@ import Avatar8 from '../assets/avatar8.jpeg';
 import {ReactComponent as RecordingSVG} from "../assets/recording.svg";
 import Voice from "../components/Voice";
 import { createUserWithEmailAndPassword, getAuth } from "@firebase/auth";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { db } from '../firebase/config';
 
 function Copyright(props) {
   return (
@@ -63,19 +65,30 @@ export default function SignUp() {
     setUser({ ...user, [property]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       user
     });
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, user.email, user.password)
-    .then((userCredential)=>{
-      console.log("Usuario creado con exito: ", userCredential);
-    })
-  };
-
+    try {
+      const newUser = await createUserWithEmailAndPassword(auth, user.email, user.password);
+      console.log("Usuario creado con exito: ", newUser);
+      
+      console.log("uid: ",  auth.currentUser.uid);
+      const users = collection(db, "dataUser");
+      await setDoc(doc(users), {
+        UID: auth.currentUser.uid,
+        name: user.name,
+        lastname: user.lastname,
+        avatar: user.avatar });
+    } catch (e)
+    {
+      console.log(e);
+    }
+  }
+  
   const avatarClick = (avtrNumber) => {
     setAvtr1("image-avatar");
     setAvtr2("image-avatar");
