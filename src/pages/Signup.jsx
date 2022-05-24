@@ -20,7 +20,7 @@ import {ReactComponent as RecordingSVG} from "../assets/recording.svg";
 import Voice from "../components/Voice";
 import { createUserWithEmailAndPassword, getAuth } from "@firebase/auth";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { db, storage } from '../firebase/config';
+import { db, storage, userLoged } from '../firebase/config';
 import { ref, uploadBytes } from "firebase/storage";
 
 function Copyright(props) {
@@ -80,7 +80,7 @@ export default function SignUp() {
 
       //guardar informacion en firestore
       const users = collection(db, "dataUser");
-      await setDoc(doc(users), {
+      await setDoc(doc(users, auth.currentUser.uid), {
         UID: auth.currentUser.uid,
         name: user.name,
         lastname: user.lastname,
@@ -97,6 +97,11 @@ export default function SignUp() {
       await uploadBytes(storageRef, audio7);
       await uploadBytes(storageRef, audio8);
       console.log("audios guardados con éxito");
+
+      userLoged.name = user.name;
+      userLoged.lastname = user.lastname;
+      userLoged.uid = auth.currentUser.uid;
+      userLoged.avatar = user.avatar;
     } catch (e)
     {
       console.log(e);

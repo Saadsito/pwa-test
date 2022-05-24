@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Logo from '../assets/logozuli.png';
 import { signInWithEmailAndPassword, getAuth } from "@firebase/auth";
+import { userLoged, db } from '../firebase/config';
+import { doc, getDoc } from "firebase/firestore";
 
 function Copyright(props) {
   return (
@@ -23,7 +25,7 @@ function Copyright(props) {
 
 export default function SignIn() {
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -31,11 +33,28 @@ export default function SignIn() {
       password: data.get('password'),
     });
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, data.get('email'), data.get('password'))
-    .then((userCredential)=>{
-      console.log("Sesion iniciada con: ", userCredential);
-      window.location.href = "/";
-    })
+    try {
+      await signInWithEmailAndPassword(auth, data.get('email'), data.get('password'));
+      console.log("Sesion iniciada con exito: ", auth.currentUser.uid);
+
+      const docRef = doc(db, "dataUser", auth.currentUser.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        userLoged.name = data.name;
+        userLoged.lastname = data.lastname;
+        userLoged.uid = data.UID;
+        userLoged.avatar = data.avatar;
+        console.log("Document data:", userLoged);
+        window.location.href = "/";
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

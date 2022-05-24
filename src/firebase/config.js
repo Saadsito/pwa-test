@@ -14,6 +14,14 @@ const firebaseConfig = {
   appId: "1:112603494268:web:8ea6a0a43dd8ee55cf56f9"
 };
 
+// objeto que guardará todos los datos del usuario logueado
+export const userLoged = {
+  name : '',
+  lastname : '',
+  uid : '',
+  avatar : ''
+}
+
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 
