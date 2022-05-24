@@ -19,7 +19,15 @@ export const userLoged = {
   name : '',
   lastname : '',
   uid : '',
-  avatar : ''
+  avatar : '',
+  audio1 : '',
+  audio2 : '',
+  audio3 : '',
+  audio4 : '',
+  audio5 : '',
+  audio6 : '',
+  audio7 : '',
+  audio8 : '',
 }
 
 // Initialize Firebase

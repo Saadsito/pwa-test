@@ -87,15 +87,14 @@ export default function SignUp() {
         avatar: user.avatar });
 
       //guardar audios
-      const storageRef = ref(storage, auth.currentUser.uid);
-      await uploadBytes(storageRef, audio1);
-      await uploadBytes(storageRef, audio2);
-      await uploadBytes(storageRef, audio3);
-      await uploadBytes(storageRef, audio4);
-      await uploadBytes(storageRef, audio5);
-      await uploadBytes(storageRef, audio6);
-      await uploadBytes(storageRef, audio7);
-      await uploadBytes(storageRef, audio8);
+      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio1`), audio1);
+      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio2`), audio2);
+      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio3`), audio3);
+      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio4`), audio4);
+      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio5`), audio5);
+      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio6`), audio6);
+      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio7`), audio7);
+      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio8`), audio8);
       console.log("audios guardados con éxito");
 
       userLoged.name = user.name;
