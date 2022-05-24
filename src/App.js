@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SignUp from './pages/Signup';
-import Voice from './components/Voice';
+import Home from './pages/Home';
 
 const theme = createTheme({
   palette: {
@@ -23,6 +23,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
+            <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<SignUp />} /> 
           </Routes>
