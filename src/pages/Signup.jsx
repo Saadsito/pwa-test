@@ -86,8 +86,13 @@ export default function SignUp() {
         lastname: user.lastname,
         avatar: user.avatar });
 
+
+      //prueba blob
+      const file = new File([audio1], 'audio1.ogg')
+      
+      
       //guardar audios
-      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio1`), audio1);
+      await uploadBytes(ref(storage, `${auth.currentUser.uid}/${file.name}`), file);
       await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio2`), audio2);
       await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio3`), audio3);
       await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio4`), audio4);
@@ -97,10 +102,6 @@ export default function SignUp() {
       await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio8`), audio8);
       console.log("audios guardados con éxito");
 
-      userLoged.name = user.name;
-      userLoged.lastname = user.lastname;
-      userLoged.uid = auth.currentUser.uid;
-      userLoged.avatar = user.avatar;
     } catch (e)
     {
       console.log(e);

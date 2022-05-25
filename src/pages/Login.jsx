@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import Logo from '../assets/logozuli.png';
 import { signInWithEmailAndPassword, getAuth } from "@firebase/auth";
 import { userLoged, db } from '../firebase/config';
-import { doc, getDoc } from "firebase/firestore";
+import { browserSessionPersistence, setPersistence } from 'firebase/auth';
 
 function Copyright(props) {
   return (
@@ -34,24 +34,14 @@ export default function SignIn() {
     });
     const auth = getAuth();
     try {
-      await signInWithEmailAndPassword(auth, data.get('email'), data.get('password'));
+      setPersistence(auth, browserSessionPersistence).then(async () => {
+        return await signInWithEmailAndPassword(auth, data.get('email'), data.get('password'));
+      }).catch((error) => {
+        console.log(error)
+      })
       console.log("Sesion iniciada con exito: ", auth.currentUser.uid);
-
-      const docRef = doc(db, "dataUser", auth.currentUser.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        userLoged.name = data.name;
-        userLoged.lastname = data.lastname;
-        userLoged.uid = data.UID;
-        userLoged.avatar = data.avatar;
-        console.log("Document data:", userLoged);
-        window.location.href = "/";
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
+      window.location.href = "/";
+      
     } catch (e) {
       console.log(e);
     }

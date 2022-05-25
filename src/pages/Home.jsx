@@ -14,30 +14,19 @@ import Avatar7 from '../assets/avatar7.jpeg';
 import Avatar8 from '../assets/avatar8.jpeg';
 import './Home.css';
 import { ref, getDownloadURL } from "firebase/storage";
-import { storage, userLoged } from '../firebase/config';
+import { storage } from '../firebase/config';
+import { useUser } from '../states/useUser';
+import {getAuth} from 'firebase/auth'
 
 export default function Home() {
-
-  const getAudios = async () => {
-    if (userLoged != ''){
-      try {
-        userLoged.audio1 = await getDownloadURL(ref(storage, `${userLoged.uid}/audio1`));
-        userLoged.audio2 = await getDownloadURL(ref(storage, `${userLoged.uid}/audio2`));
-        userLoged.audio3 = await getDownloadURL(ref(storage, `${userLoged.uid}/audio3`));
-        userLoged.audio4 = await getDownloadURL(ref(storage, `${userLoged.uid}/audio4`));
-        userLoged.audio5 = await getDownloadURL(ref(storage, `${userLoged.uid}/audio5`));
-        userLoged.audio6 = await getDownloadURL(ref(storage, `${userLoged.uid}/audio6`));
-        userLoged.audio7 = await getDownloadURL(ref(storage, `${userLoged.uid}/audio7`));
-        userLoged.audio8 = await getDownloadURL(ref(storage, `${userLoged.uid}/audio8`));
-      } catch (e){
-        console.log("hay un error con los audios unu: ", e);
-      }
-    }
-  }
+  const user = useUser()
+  React.useEffect(() => {
+    console.log(getAuth().currentUser.uid)
+    console.log(user)
+  }, [])
 
   return (
     <div>
-      {getAudios()}
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
@@ -52,7 +41,6 @@ export default function Home() {
           </Typography>
           <img src={Avatar1} className="avatar" />
           <ButtonVoice title={"Hola"}/>
-          {userLoged.audio1 ? <audio controls src={userLoged.audio1}/> : null}
           <ButtonVoice title={"¿Cómo estás?"}/>
           <ButtonVoice title={"Buenos días"}/>
           <ButtonVoice title={"Buenas Tardes"}/>
@@ -61,6 +49,13 @@ export default function Home() {
           <ButtonVoice title={"Te extraño"}/>
           <ButtonVoice title={"¿Ya comiste?"}/>
           <Divider sx={{width: '100%', margin: '20pt'}}/>
+          <audio controls src="https://firebasestorage.googleapis.com/v0/b/zuli-app.appspot.com/o/l7vF6fgFFhXpGKTbWPUR50Z79nO2%2Faudio1.ogg?alt=media&token=fe3b02d2-8152-4b7b-af94-3003bcc8865a"/>
+          <button onClick={async() => {
+            await getAuth().signOut()
+            console.log('listo')
+          }}>
+            prueba
+          </button>
           <Typography component="h1" variant="h3">
             Juegos
           </Typography>
