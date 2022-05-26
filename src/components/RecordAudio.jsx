@@ -1,17 +1,39 @@
 import { Typography } from '@mui/material';
-import React, { useState } from 'react';
-import { ReactMic } from 'react-mic';
+import React, { useRef, useEffect, useState } from 'react';
 
 const RecordAudio = ({ title, name }) => {
-  const [recording, setRecording] = useState(false);
+  const audioRef = useRef(null);
+  const startRef = useRef(null);
+  const stopRef = useRef(null);
+  const chunks = [];
+  let rec;
 
-  console.log(name);
+  const onStart = () => {
+    startRef.current.disabled = true;
+    stopRef.current.disabled = false;
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+      rec = new MediaRecorder(stream);
+      rec.start();
 
-  const handleStop = (data) => {
-    console.log(name);
-    window.localStorage.setItem(name, JSON.stringify(data));
-    console.log(JSON.parse(localStorage.getItem(name)));
-    // console.log(window.localStorage.getItem(name).blobURL);
+      chunks.splice(0, chunks.length);
+
+      rec.ondataavailable = (e) => {
+        chunks.push(e.data);
+      };
+
+      rec.onstop = () => {
+        const blob = new Blob(chunks, { type: 'audio/mp3' });
+        const blobURL = URL.createObjectURL(blob);
+        audioRef.current.src = blobURL;
+        audioRef.current.controls = true;
+      };
+    });
+  };
+
+  const onStop = () => {
+    startRef.current.disabled = false;
+    stopRef.current.disabled = true;
+    rec.stop();
   };
 
   return (
@@ -21,25 +43,15 @@ const RecordAudio = ({ title, name }) => {
         variant="h6"
         style={{ marginBottom: '5pt', color: '#fff' }}
       >
-        {name}
+        {title}
       </Typography>
-      <div style={{ display: 'none' }}>
-        <ReactMic
-          // strokeColor="white"
-          record={recording}
-          mimeType="audio/mp3"
-          onStop={handleStop}
-          key={name}
-        />
-      </div>
-
-      <button type="button" onClick={() => setRecording(true)}>
-        Iniciar
+      <button type="button" ref={startRef} onClick={onStart}>
+        Grabar
       </button>
-
-      <button type="button" onClick={() => setRecording(false)}>
-        Parar
+      <button type="button" ref={stopRef} onClick={onStop}>
+        Stop
       </button>
+      <audio ref={audioRef} />
     </div>
   );
 };

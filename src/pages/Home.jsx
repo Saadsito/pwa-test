@@ -58,7 +58,7 @@ export default function Home() {
           <Typography component="h1" variant="h3">
             Juegos
           </Typography>
-          <div className="container-games">
+          {/* <div className="container-games">
             <div className='divFlex'>
               <Game img={Domino} link={"https://vipgames.com/es/domino/#singleplayer"}/>
               <Game img={Ajedrez} link={"https://www.cokitos.com/juego-ajedrez-online/play/"}/>
@@ -75,7 +75,7 @@ export default function Home() {
               <Game img={Memoria2} link={"https://www.cokitos.com/juego-crear-y-memorizar-la-secuencia/play/"}/>
               <Game img={Damas} link={"https://www.cokitos.com/juego-damas-online/play/"}/>
             </div>
-          </div>
+          </div> */}
         </Box>
       </Container>
     </div>
