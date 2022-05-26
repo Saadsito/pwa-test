@@ -1,16 +1,14 @@
 import { Typography } from '@mui/material';
 import React, { useRef, useEffect, useState } from 'react';
+import StopIcon from '@mui/icons-material/Stop';
+import MicIcon from '@mui/icons-material/Mic';
 
 const RecordAudio = ({ title, name }) => {
   const audioRef = useRef(null);
-  const startRef = useRef(null);
-  const stopRef = useRef(null);
   const chunks = [];
   let rec;
 
   const onStart = () => {
-    startRef.current.disabled = true;
-    stopRef.current.disabled = false;
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
       rec = new MediaRecorder(stream);
       rec.start();
@@ -31,12 +29,6 @@ const RecordAudio = ({ title, name }) => {
     });
   };
 
-  const onStop = () => {
-    startRef.current.disabled = false;
-    stopRef.current.disabled = true;
-    rec.stop();
-  };
-
   return (
     <div>
       <Typography
@@ -46,12 +38,15 @@ const RecordAudio = ({ title, name }) => {
       >
         {title}
       </Typography>
-      <button type="button" ref={startRef} onClick={onStart}>
-        Grabar
-      </button>
-      <button type="button" ref={stopRef} onClick={onStop}>
-        Stop
-      </button>
+      <div style={{margin: '10pt', display: 'inline-flex'}}>
+        <div style={{cursor: 'pointer', color: '#fff'}} onClick={onStart}>
+          <MicIcon/>
+        </div>
+        <div style={{marginLeft: '20pt', marginRight: '20pt'}}/>
+        <div style={{cursor: 'pointer', color: '#fff'}} onClick={() => rec.stop()}>
+          <StopIcon/>
+        </div>
+      </div>
       <audio ref={audioRef} />
     </div>
   );
