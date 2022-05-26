@@ -19,6 +19,12 @@ import { signOut } from 'firebase/auth';
 export default function Home() {
   const user = useUser();
 
+  /*
+    audio1: user.audios[0]
+    audio2: user.audios[1]
+    ... y asi
+  */
+
   return (
     <div>
       <Container component="main" maxWidth="xs">
@@ -43,10 +49,7 @@ export default function Home() {
           <ButtonVoice title={'Te extraño'} />
           <ButtonVoice title={'¿Ya comiste?'} />
           <Divider sx={{ width: '100%', margin: '20pt' }} />
-          <audio
-            controls
-            src="https://firebasestorage.googleapis.com/v0/b/zuli-app.appspot.com/o/l7vF6fgFFhXpGKTbWPUR50Z79nO2%2Faudio1.ogg?alt=media&token=fe3b02d2-8152-4b7b-af94-3003bcc8865a"
-          />
+          <audio controls src={user.audios[0]} />
           <button
             onClick={async () => {
               await signOut(auth);
@@ -58,7 +61,7 @@ export default function Home() {
           <Typography component="h1" variant="h3">
             Juegos
           </Typography>
-          <div className="container-games">
+          {/* <div className="container-games">
             <div className='divFlex'>
               <Game img={Domino} link={"https://vipgames.com/es/domino/#singleplayer"}/>
               <Game img={Ajedrez} link={"https://www.cokitos.com/juego-ajedrez-online/play/"}/>
@@ -75,7 +78,7 @@ export default function Home() {
               <Game img={Memoria2} link={"https://www.cokitos.com/juego-crear-y-memorizar-la-secuencia/play/"}/>
               <Game img={Damas} link={"https://www.cokitos.com/juego-damas-online/play/"}/>
             </div>
-          </div>
+          </div> */}
         </Box>
       </Container>
     </div>
