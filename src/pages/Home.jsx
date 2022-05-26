@@ -13,17 +13,15 @@ import Avatar6 from '../assets/avatar6.jpeg';
 import Avatar7 from '../assets/avatar7.jpeg';
 import Avatar8 from '../assets/avatar8.jpeg';
 import './Home.css';
-import { ref, getDownloadURL } from "firebase/storage";
-import { storage } from '../firebase/config';
+import { auth } from '../firebase/config';
 import { useUser } from '../states/useUser';
-import {getAuth} from 'firebase/auth'
-
+import { signOut } from 'firebase/auth';
 export default function Home() {
-  const user = useUser()
+  const user = useUser();
+
   React.useEffect(() => {
-    console.log(getAuth().currentUser.uid)
-    console.log(user)
-  }, [])
+    console.log(user);
+  }, []);
 
   return (
     <div>
@@ -40,20 +38,25 @@ export default function Home() {
             ¡Comunícate!
           </Typography>
           <img src={Avatar1} className="avatar" />
-          <ButtonVoice title={"Hola"}/>
-          <ButtonVoice title={"¿Cómo estás?"}/>
-          <ButtonVoice title={"Buenos días"}/>
-          <ButtonVoice title={"Buenas Tardes"}/>
-          <ButtonVoice title={"Buenas noches"}/>
-          <ButtonVoice title={"¿Cómo estuvo tu día?"}/>
-          <ButtonVoice title={"Te extraño"}/>
-          <ButtonVoice title={"¿Ya comiste?"}/>
-          <Divider sx={{width: '100%', margin: '20pt'}}/>
-          <audio controls src="https://firebasestorage.googleapis.com/v0/b/zuli-app.appspot.com/o/l7vF6fgFFhXpGKTbWPUR50Z79nO2%2Faudio1.ogg?alt=media&token=fe3b02d2-8152-4b7b-af94-3003bcc8865a"/>
-          <button onClick={async() => {
-            await getAuth().signOut()
-            console.log('listo')
-          }}>
+          <ButtonVoice title={'Hola'} />
+          <ButtonVoice title={'¿Cómo estás?'} />
+          <ButtonVoice title={'Buenos días'} />
+          <ButtonVoice title={'Buenas Tardes'} />
+          <ButtonVoice title={'Buenas noches'} />
+          <ButtonVoice title={'¿Cómo estuvo tu día?'} />
+          <ButtonVoice title={'Te extraño'} />
+          <ButtonVoice title={'¿Ya comiste?'} />
+          <Divider sx={{ width: '100%', margin: '20pt' }} />
+          <audio
+            controls
+            src="https://firebasestorage.googleapis.com/v0/b/zuli-app.appspot.com/o/l7vF6fgFFhXpGKTbWPUR50Z79nO2%2Faudio1.ogg?alt=media&token=fe3b02d2-8152-4b7b-af94-3003bcc8865a"
+          />
+          <button
+            onClick={async () => {
+              await signOut(auth);
+              window.location.href = '/login';
+            }}
+          >
             prueba
           </button>
           <Typography component="h1" variant="h3">

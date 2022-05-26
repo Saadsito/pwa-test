@@ -29,32 +29,24 @@ export const UserProvider = ({ children }) => {
           try {
             console.log('iniciando carga');
             audioData.push(
-              await getDownloadURL(
-                ref(storage, `${auth.currentUser.uid}/audio1.oga`)
-              )
+              await getDownloadURL(ref(storage, `${user.uid}/audio1`))
             );
             audioData.push(
-              await getDownloadURL(
-                ref(storage, `${auth.currentUser.uid}/audio2`)
-              )
+              await getDownloadURL(ref(storage, `${user.uid}/audio2`))
             );
             audioData.push(
-              await getDownloadURL(
-                ref(storage, `${auth.currentUser.uid}/audio3`)
-              )
+              await getDownloadURL(ref(storage, `${user.uid}/audio3`))
             );
             audioData.push(
-              await getDownloadURL(
-                ref(storage, `${auth.currentUser.uid}/audio4`)
-              )
+              await getDownloadURL(ref(storage, `${user.uid}/audio4`))
             );
             setUser({ ...userData, audios: audioData });
-            setLoading(false);
           } catch (err) {
             console.log(`ERROR: ${err}`);
           }
         }
       }
+      setLoading(false);
     });
 
     return unsubscribe;

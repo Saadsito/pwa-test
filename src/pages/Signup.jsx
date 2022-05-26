@@ -17,10 +17,10 @@ import Avatar6 from '../assets/avatar6.jpeg';
 import Avatar7 from '../assets/avatar7.jpeg';
 import Avatar8 from '../assets/avatar8.jpeg';
 import { ReactComponent as RecordingSVG } from '../assets/recording.svg';
-import Voice from '../components/Voice';
-import { createUserWithEmailAndPassword, getAuth } from '@firebase/auth';
+import RecordAudio from '../components/RecordAudio';
+import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { collection, doc, setDoc } from 'firebase/firestore';
-import { db, storage, userLoged } from '../firebase/config';
+import { db, storage, userLoged, auth } from '../firebase/config';
 import { ref, uploadBytes } from 'firebase/storage';
 
 function Copyright(props) {
@@ -71,17 +71,48 @@ export default function SignUp() {
     setUser({ ...user, [property]: value });
   };
 
+  const getFileBlob = (url, cb) => {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.addEventListener('load', function () {
+      cb(xhr.response);
+    });
+    xhr.send();
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       user,
     });
-    const auth = getAuth();
+    console.log(JSON.parse(window.localStorage.getItem('audio8')));
     try {
+      // test
+      getFileBlob(
+        JSON.parse(window.localStorage.getItem('audio8')).blobURL,
+        async (blob) => {
+          await uploadBytes(ref(storage, `test`), blob);
+        }
+      );
+
+      console.log('listo');
+      return;
+      // test end
+
+      for (let i = 1; i <= 8; i++) {
+        if (!window.localStorage.getItem(`audio${i}`))
+          throw new Error(`NOT FOUND audio${i}`, 404);
+      }
+
       //autenticacion de usuario
-      await createUserWithEmailAndPassword(auth, user.email, user.password);
-      console.log('Usuario creado con exito: ', auth.currentUser.uid);
+      const userLogged = await createUserWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      );
+      console.log('Usuario creado con exito: ', userLogged.user.uid);
 
       //guardar informacion en firestore
       const users = collection(db, 'dataUser');
@@ -93,20 +124,41 @@ export default function SignUp() {
       });
 
       //prueba blob
-      const file = new File([audio1], 'audio1.ogg');
 
       //guardar audios
+
       await uploadBytes(
-        ref(storage, `${auth.currentUser.uid}/${file.name}`),
-        file
+        ref(storage, `${auth.currentUser.uid}/audio1`),
+        window.localStorage.getItem('audio1')
       );
-      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio2`), audio2);
-      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio3`), audio3);
-      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio4`), audio4);
-      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio5`), audio5);
-      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio6`), audio6);
-      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio7`), audio7);
-      await uploadBytes(ref(storage, `${auth.currentUser.uid}/audio8`), audio8);
+      await uploadBytes(
+        ref(storage, `${auth.currentUser.uid}/audio2`),
+        window.localStorage.getItem('audio2')
+      );
+      await uploadBytes(
+        ref(storage, `${auth.currentUser.uid}/audio3`),
+        window.localStorage.getItem('audio3')
+      );
+      await uploadBytes(
+        ref(storage, `${auth.currentUser.uid}/audio4`),
+        window.localStorage.getItem('audio4')
+      );
+      await uploadBytes(
+        ref(storage, `${auth.currentUser.uid}/audio5`),
+        window.localStorage.getItem('audio5')
+      );
+      await uploadBytes(
+        ref(storage, `${auth.currentUser.uid}/audio6`),
+        window.localStorage.getItem('audio6')
+      );
+      await uploadBytes(
+        ref(storage, `${auth.currentUser.uid}/audio7`),
+        window.localStorage.getItem('audio7')
+      );
+      await uploadBytes(
+        ref(storage, `${auth.currentUser.uid}/audio8`),
+        window.localStorage.getItem('audio8')
+      );
       console.log('audios guardados con éxito');
       window.location.href = '/';
     } catch (e) {
@@ -275,28 +327,28 @@ export default function SignUp() {
               <RecordingSVG className="record-svg" />
             </div>
             <div className="sentence-section">
-              <Voice setAudio={setAudio1} title={'Hola'} />
+              <RecordAudio title={'Hola'} name="audio1" />
             </div>
             <div className="sentence-section">
-              <Voice setAudio={setAudio2} title={'¿Cómo estás?'} />
+              <RecordAudio title={'¿Cómo estás?'} name="audio2" />
             </div>
             <div className="sentence-section">
-              <Voice setAudio={setAudio3} title={'Buenos días'} />
+              <RecordAudio title={'Buenos días'} name="audio3" />
             </div>
             <div className="sentence-section">
-              <Voice setAudio={setAudio4} title={'Buenas tardes'} />
+              <RecordAudio title={'Buenas tardes'} name="audio4" />
             </div>
             <div className="sentence-section">
-              <Voice setAudio={setAudio5} title={'Buenas noches'} />
+              <RecordAudio title={'Buenas noches'} name="audio5" />
             </div>
             <div className="sentence-section">
-              <Voice setAudio={setAudio6} title={'¿Cómo estuvo tu día?'} />
+              <RecordAudio title={'¿Cómo estuvo tu día?'} name="audio6" />
             </div>
             <div className="sentence-section">
-              <Voice setAudio={setAudio7} title={'Te extraño'} />
+              <RecordAudio title={'Te extraño'} name="audio7" />
             </div>
             <div className="sentence-section">
-              <Voice setAudio={setAudio8} title={'¿Ya comiste'} />
+              <RecordAudio title={'¿Ya comiste?'} name="audio8" />
             </div>
             <Button
               type="submit"

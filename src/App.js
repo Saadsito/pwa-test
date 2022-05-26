@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SignUp from './pages/Signup';
 import Home from './pages/Home';
 import { UserProvider } from './states/useUser';
+import RecordAudio from './components/RecordAudio';
 
 const theme = createTheme({
   palette: {
@@ -36,6 +37,7 @@ function App() {
               <Route exact path="/signup" element={<UnAuthRoute />}>
                 <Route exact path="/signup" element={<SignUp />} />
               </Route>
+              <Route exact path="/test" element={<RecordAudio />} />
             </Routes>
           </Router>
         </UserProvider>
