@@ -8,25 +8,46 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Logo from '../assets/logozuli.png';
+import { signInWithEmailAndPassword } from '@firebase/auth';
+import { browserSessionPersistence, setPersistence } from 'firebase/auth';
+import { auth } from '../firebase/config';
 
 function Copyright(props) {
   return (
     <div>
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        Universidad Católica Andrés Bello <br/> Pontificia Universidad Católica del Ecuador
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        {...props}
+      >
+        Universidad Católica Andrés Bello <br /> Pontificia Universidad Católica
+        del Ecuador
       </Typography>
     </div>
   );
 }
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    try {
+      await signInWithEmailAndPassword(
+        auth,
+        data.get('email'),
+        data.get('password')
+      );
+      console.log('Sesion iniciada con exito: ', auth.currentUser.uid);
+      window.location.href = '/';
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -41,8 +62,13 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <img src={Logo} style={{width: '100pt', height: '100pt'}}/>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <img src={Logo} style={{ width: '100pt', height: '100pt' }} />
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               fullWidth
@@ -66,15 +92,15 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              style={{height: '40pt'}}
+              style={{ height: '40pt' }}
               color="secondary"
             >
               Iniciar sesión
             </Button>
             <Grid container justifyContent="center">
-              <Grid item >
+              <Grid item>
                 <Link href="/signup" variant="body2" color="#000">
-                  {"¿Aún no estás registrado? Regístrate aquí"}
+                  {'¿Aún no estás registrado? Regístrate aquí'}
                 </Link>
               </Grid>
             </Grid>
