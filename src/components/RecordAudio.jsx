@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { ReactMic } from 'react-mic';
+import MicIcon from '@mui/icons-material/Mic';
+import StopIcon from '@mui/icons-material/Stop';
 
 const RecordAudio = ({ title, name }) => {
   const [recording, setRecording] = useState(false);
@@ -19,9 +21,9 @@ const RecordAudio = ({ title, name }) => {
       <Typography
         component="h3"
         variant="h6"
-        style={{ marginBottom: '5pt', color: '#fff' }}
+        style={{ marginBottom: '20pt', color: '#fff' }}
       >
-        {name}
+        {title}
       </Typography>
       <div style={{ display: 'none' }}>
         <ReactMic
@@ -33,13 +35,15 @@ const RecordAudio = ({ title, name }) => {
         />
       </div>
 
-      <button type="button" onClick={() => setRecording(true)}>
-        Iniciar
-      </button>
-
-      <button type="button" onClick={() => setRecording(false)}>
-        Parar
-      </button>
+      <div style={{display: 'inline-flex', color: '#fff'}}>
+        <div style={{cursor: 'pointer'}} onClick={() => setRecording(true)}>
+          <MicIcon/>
+        </div>
+        <div style={{marginLeft: '20pt', marginRight: '20pt'}}/>
+        <div style={{cursor: 'pointer'}} onClick={() => setRecording(false)}>
+          <StopIcon/>
+        </div>
+      </div>
     </div>
   );
 };

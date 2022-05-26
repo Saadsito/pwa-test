@@ -8,7 +8,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SignUp from './pages/Signup';
 import Home from './pages/Home';
 import { UserProvider } from './states/useUser';
-import RecordAudio from './components/RecordAudio';
+import Audio1 from './pages/Audio1';
+import Audio2 from './pages/Audio2';
+import Audio3 from './pages/Audio3';
+import Audio4 from './pages/Audio4';
+import Audio5 from './pages/Audio5';
+import Audio6 from './pages/Audio6';
+import Audio7 from './pages/Audio7';
+import Audio8 from './pages/Audio8';
 
 const theme = createTheme({
   palette: {
@@ -37,7 +44,30 @@ function App() {
               <Route exact path="/signup" element={<UnAuthRoute />}>
                 <Route exact path="/signup" element={<SignUp />} />
               </Route>
-              <Route exact path="/test" element={<RecordAudio />} />
+              <Route exact path="/audio1" element={<UnAuthRoute />}>
+                <Route exact path="/audio1" element={<Audio1 />} />
+              </Route>
+              <Route exact path="/audio2" element={<UnAuthRoute />}>
+                <Route exact path="/audio2" element={<Audio2 />} />
+              </Route>
+              <Route exact path="/audio3" element={<UnAuthRoute />}>
+                <Route exact path="/audio3" element={<Audio3 />} />
+              </Route>
+              <Route exact path="/audio4" element={<UnAuthRoute />}>
+                <Route exact path="/audio4" element={<Audio4 />} />
+              </Route>
+              <Route exact path="/audio5" element={<UnAuthRoute />}>
+                <Route exact path="/audio5" element={<Audio5 />} />
+              </Route>
+              <Route exact path="/audio6" element={<UnAuthRoute />}>
+                <Route exact path="/audio6" element={<Audio6 />} />
+              </Route>
+              <Route exact path="/audio7" element={<UnAuthRoute />}>
+                <Route exact path="/audio7" element={<Audio7 />} />
+              </Route>
+              <Route exact path="/audio8" element={<UnAuthRoute />}>
+                <Route exact path="/audio8" element={<Audio8 />} />
+              </Route>
             </Routes>
           </Router>
         </UserProvider>

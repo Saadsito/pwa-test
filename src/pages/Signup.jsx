@@ -16,12 +16,12 @@ import Avatar5 from '../assets/avatar5.jpeg';
 import Avatar6 from '../assets/avatar6.jpeg';
 import Avatar7 from '../assets/avatar7.jpeg';
 import Avatar8 from '../assets/avatar8.jpeg';
-import { ReactComponent as RecordingSVG } from '../assets/recording.svg';
 import RecordAudio from '../components/RecordAudio';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { db, storage, userLoged, auth } from '../firebase/config';
 import { ref, uploadBytes } from 'firebase/storage';
+import Instruction from './Instruction';
 
 function Copyright(props) {
   return (
@@ -315,18 +315,7 @@ export default function SignUp() {
                 onClick={() => avatarClick(8)}
               />
             </div>
-            <div>
-              <Typography
-                component="h3"
-                variant="h6"
-                style={{ marginTop: '20pt' }}
-              >
-                Grábate respondiendo a las siguientes sentencias como si fuera
-                tu familiar el que te está hablando
-              </Typography>
-              <RecordingSVG className="record-svg" />
-            </div>
-            <div className="sentence-section">
+            {/* <div className="sentence-section">
               <RecordAudio title={'Hola'} name="audio1" />
             </div>
             <div className="sentence-section">
@@ -349,7 +338,7 @@ export default function SignUp() {
             </div>
             <div className="sentence-section">
               <RecordAudio title={'¿Ya comiste?'} name="audio8" />
-            </div>
+            </div> */}
             <Button
               type="submit"
               fullWidth
@@ -357,8 +346,9 @@ export default function SignUp() {
               sx={{ mt: 3, mb: 2 }}
               style={{ height: '40pt' }}
               color="secondary"
+              href="/audio1"
             >
-              Regístrate
+              Continuar
             </Button>
             <Grid container justifyContent="center">
               <Grid item>
