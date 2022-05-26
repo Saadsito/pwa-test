@@ -24,6 +24,7 @@ const RecordAudio = ({ title, name }) => {
       rec.onstop = () => {
         const blob = new Blob(chunks, { type: 'audio/mp3' });
         const blobURL = URL.createObjectURL(blob);
+        localStorage.setItem(name, blobURL);
         audioRef.current.src = blobURL;
         audioRef.current.controls = true;
       };

@@ -87,23 +87,19 @@ export default function SignUp() {
     console.log({
       user,
     });
-    console.log(JSON.parse(window.localStorage.getItem('audio8')));
-    try {
-      // test
-      getFileBlob(
-        JSON.parse(window.localStorage.getItem('audio8')).blobURL,
-        async (blob) => {
-          await uploadBytes(ref(storage, `test`), blob);
-        }
-      );
 
-      console.log('listo');
-      return;
-      // test end
+    try {
+      // // test
+      // getFileBlob(
+      //   JSON.parse(window.localStorage.getItem('audio8')).blobURL,
+      //   async (blob) => {
+      //     await uploadBytes(ref(storage, `test`), blob);
+      //   }
+      // );
 
       for (let i = 1; i <= 8; i++) {
         if (!window.localStorage.getItem(`audio${i}`))
-          throw new Error(`NOT FOUND audio${i}`, 404);
+          throw new Error(`not found audio${i}`, 404);
       }
 
       //autenticacion de usuario
@@ -114,9 +110,18 @@ export default function SignUp() {
       );
       console.log('Usuario creado con exito: ', userLogged.user.uid);
 
+      for (let i = 1; i <= 8; i++) {
+        getFileBlob(localStorage.getItem(`audio${i}`), async (blob) => {
+          await uploadBytes(
+            ref(storage, `${userLogged.user.uid}/audio${i}`),
+            blob
+          );
+        });
+      }
+
       //guardar informacion en firestore
       const users = collection(db, 'dataUser');
-      await setDoc(doc(users, auth.currentUser.uid), {
+      await setDoc(doc(users, userLogged.user.uid), {
         UID: auth.currentUser.uid,
         name: user.name,
         lastname: user.lastname,
@@ -127,40 +132,7 @@ export default function SignUp() {
 
       //guardar audios
 
-      await uploadBytes(
-        ref(storage, `${auth.currentUser.uid}/audio1`),
-        window.localStorage.getItem('audio1')
-      );
-      await uploadBytes(
-        ref(storage, `${auth.currentUser.uid}/audio2`),
-        window.localStorage.getItem('audio2')
-      );
-      await uploadBytes(
-        ref(storage, `${auth.currentUser.uid}/audio3`),
-        window.localStorage.getItem('audio3')
-      );
-      await uploadBytes(
-        ref(storage, `${auth.currentUser.uid}/audio4`),
-        window.localStorage.getItem('audio4')
-      );
-      await uploadBytes(
-        ref(storage, `${auth.currentUser.uid}/audio5`),
-        window.localStorage.getItem('audio5')
-      );
-      await uploadBytes(
-        ref(storage, `${auth.currentUser.uid}/audio6`),
-        window.localStorage.getItem('audio6')
-      );
-      await uploadBytes(
-        ref(storage, `${auth.currentUser.uid}/audio7`),
-        window.localStorage.getItem('audio7')
-      );
-      await uploadBytes(
-        ref(storage, `${auth.currentUser.uid}/audio8`),
-        window.localStorage.getItem('audio8')
-      );
       console.log('audios guardados con éxito');
-      window.location.href = '/';
     } catch (e) {
       console.log(e);
     }
