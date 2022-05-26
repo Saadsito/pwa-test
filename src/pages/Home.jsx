@@ -19,10 +19,6 @@ import { signOut } from 'firebase/auth';
 export default function Home() {
   const user = useUser();
 
-  React.useEffect(() => {
-    console.log(user);
-  }, []);
-
   return (
     <div>
       <Container component="main" maxWidth="xs">
@@ -62,6 +58,24 @@ export default function Home() {
           <Typography component="h1" variant="h3">
             Juegos
           </Typography>
+          <div className="container-games">
+            <div className='divFlex'>
+              <Game img={Domino} link={"https://vipgames.com/es/domino/#singleplayer"}/>
+              <Game img={Ajedrez} link={"https://www.cokitos.com/juego-ajedrez-online/play/"}/>
+            </div>
+            <div className='divFlex'>
+              <Game img={Solitario} link={"https://www.cokitos.com/solitario-frvr/play/"}/>
+              <Game img={Parchis} link={"https://www.cokitos.com/leyenda-del-parchis/play/"}/>
+            </div>
+            <div className='divFlex'>
+              <Game img={Memoria} link={"https://www.cokitos.com/memorizar-patron-de-colores/play/"}/>
+              <Game img={Rompecabezas} link={"https://www.cokitos.com/rompecabezas-de-van-gogh/play/"}/>  
+            </div>
+            <div className='divFlex'>
+              <Game img={Memoria2} link={"https://www.cokitos.com/juego-crear-y-memorizar-la-secuencia/play/"}/>
+              <Game img={Damas} link={"https://www.cokitos.com/juego-damas-online/play/"}/>
+            </div>
+          </div>
         </Box>
       </Container>
     </div>
