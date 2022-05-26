@@ -16,13 +16,21 @@ import './Home.css';
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from '../firebase/config';
 import { useUser } from '../states/useUser';
-import {getAuth} from 'firebase/auth'
+import {getAuth} from 'firebase/auth';
+import Domino from '../assets/domino.png';
+import Ajedrez from '../assets/ajedrez.png';
+import Game from '../components/Game';
+import Solitario from '../assets/solitario.png';
+import Parchis from '../assets/parchis.png';
+import Memoria from '../assets/memoria.png';
+import Memoria2 from '../assets/memoria2.png';
+import Rompecabezas from '../assets/rompecabezas.png';
+import Damas from '../assets/damas.png';
 
 export default function Home() {
   const user = useUser()
   React.useEffect(() => {
-    console.log(getAuth().currentUser.uid)
-    console.log(user)
+    
   }, [])
 
   return (
@@ -59,6 +67,24 @@ export default function Home() {
           <Typography component="h1" variant="h3">
             Juegos
           </Typography>
+          <div className="container-games">
+            <div className='divFlex'>
+              <Game img={Domino} link={"https://vipgames.com/es/domino/#singleplayer"}/>
+              <Game img={Ajedrez} link={"https://www.cokitos.com/juego-ajedrez-online/play/"}/>
+            </div>
+            <div className='divFlex'>
+              <Game img={Solitario} link={"https://www.cokitos.com/solitario-frvr/play/"}/>
+              <Game img={Parchis} link={"https://www.cokitos.com/leyenda-del-parchis/play/"}/>
+            </div>
+            <div className='divFlex'>
+              <Game img={Memoria} link={"https://www.cokitos.com/memorizar-patron-de-colores/play/"}/>
+              <Game img={Rompecabezas} link={"https://www.cokitos.com/rompecabezas-de-van-gogh/play/"}/>  
+            </div>
+            <div className='divFlex'>
+              <Game img={Memoria2} link={"https://www.cokitos.com/juego-crear-y-memorizar-la-secuencia/play/"}/>
+              <Game img={Damas} link={"https://www.cokitos.com/juego-damas-online/play/"}/>
+            </div>
+          </div>
         </Box>
       </Container>
     </div>

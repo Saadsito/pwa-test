@@ -3,3 +3,14 @@
     height: 200pt;
     margin-bottom: -20pt;
 }
+
+.container-games{
+    margin: 20pt;
+    justify-content: center;
+    width: 100%;
+    margin-left: 4pt;
+}
+
+.divFlex{
+    display: inline-flex;
+}
