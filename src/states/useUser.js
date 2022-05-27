@@ -20,49 +20,42 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        if (JSON.parse(localStorage.getItem('user'))) {
-          setUser(JSON.parse(localStorage.getItem('user')));
-        } else {
-          const docRef = doc(db, 'dataUser', user.uid);
-          const docSnap = await getDoc(docRef);
+        const docRef = doc(db, 'dataUser', user.uid);
+        const docSnap = await getDoc(docRef);
 
-          if (docSnap.exists()) {
-            const userData = docSnap.data();
-            const audioData = [];
-            try {
-              console.log('iniciando carga');
-              audioData.push(
-                await getDownloadURL(ref(storage, `${user.uid}/audio1`))
-              );
-              audioData.push(
-                await getDownloadURL(ref(storage, `${user.uid}/audio2`))
-              );
-              audioData.push(
-                await getDownloadURL(ref(storage, `${user.uid}/audio3`))
-              );
-              audioData.push(
-                await getDownloadURL(ref(storage, `${user.uid}/audio4`))
-              );
-              audioData.push(
-                await getDownloadURL(ref(storage, `${user.uid}/audio5`))
-              );
-              audioData.push(
-                await getDownloadURL(ref(storage, `${user.uid}/audio6`))
-              );
-              audioData.push(
-                await getDownloadURL(ref(storage, `${user.uid}/audio7`))
-              );
-              audioData.push(
-                await getDownloadURL(ref(storage, `${user.uid}/audio8`))
-              );
-              localStorage.setItem(
-                'user',
-                JSON.stringify({ ...userData, audios: audioData })
-              );
-              setUser({ ...userData, audios: audioData });
-            } catch (err) {
-              console.log(`ERROR: ${err}`);
-            }
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          const audioData = [];
+          try {
+            console.log('iniciando carga');
+            audioData.push(
+              await getDownloadURL(ref(storage, `${user.uid}/audio1`))
+            );
+            audioData.push(
+              await getDownloadURL(ref(storage, `${user.uid}/audio2`))
+            );
+            audioData.push(
+              await getDownloadURL(ref(storage, `${user.uid}/audio3`))
+            );
+            audioData.push(
+              await getDownloadURL(ref(storage, `${user.uid}/audio4`))
+            );
+            audioData.push(
+              await getDownloadURL(ref(storage, `${user.uid}/audio5`))
+            );
+            audioData.push(
+              await getDownloadURL(ref(storage, `${user.uid}/audio6`))
+            );
+            audioData.push(
+              await getDownloadURL(ref(storage, `${user.uid}/audio7`))
+            );
+            audioData.push(
+              await getDownloadURL(ref(storage, `${user.uid}/audio8`))
+            );
+
+            setUser({ ...userData, audios: audioData });
+          } catch (err) {
+            console.log(`ERROR: ${err}`);
           }
         }
       }
