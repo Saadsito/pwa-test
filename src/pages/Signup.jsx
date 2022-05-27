@@ -91,7 +91,7 @@ export default function SignUp() {
       //   }
       // );
 
-      for (let i = 1; i <= 8; i++) {
+      for (let i = 1; i <= 8+newSentences.length; i++) {
         if (!window.localStorage.getItem(`audio${i}`))
           throw new Error(`not found audio${i}`, 404);
       }
@@ -104,7 +104,7 @@ export default function SignUp() {
       );
       console.log('Usuario creado con exito: ', userLogged.user.uid);
 
-      for (let i = 1; i <= 8; i++) {
+      for (let i = 1; i <= 8+newSentences.length; i++) {
         getFileBlob(localStorage.getItem(`audio${i}`), async (blob) => {
           await uploadBytes(
             ref(storage, `${userLogged.user.uid}/audio${i}`),
