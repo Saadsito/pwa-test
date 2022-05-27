@@ -58,14 +58,8 @@ export default function SignUp() {
   const [avtr7, setAvtr7] = useState('image-avatar');
   const [avtr8, setAvtr8] = useState('image-avatar');
 
-  const [audio1, setAudio1] = useState(null);
-  const [audio2, setAudio2] = useState(null);
-  const [audio3, setAudio3] = useState(null);
-  const [audio4, setAudio4] = useState(null);
-  const [audio5, setAudio5] = useState(null);
-  const [audio6, setAudio6] = useState(null);
-  const [audio7, setAudio7] = useState(null);
-  const [audio8, setAudio8] = useState(null);
+  const [newSentences, setNewSentences] = useState([]);
+  const [sentence, setSentence] = useState("");
 
   const changeValue = (property, value) => {
     setUser({ ...user, [property]: value });
@@ -177,6 +171,11 @@ export default function SignUp() {
         console.log('error');
     }
   };
+
+  const addSentence = () => {
+    setNewSentences( [...newSentences, sentence]);
+    setSentence("");
+  }
 
   return (
     <div>
@@ -297,6 +296,23 @@ export default function SignUp() {
                 tu familiar el que te está hablando
               </Typography>
               <RecordingSVG className="record-svg" />
+              <TextField
+                name="newSentence"
+                fullWidth
+                label="Agregar sentencia"
+                value={sentence}
+                onChange={(e) => setSentence(e.target.value)}
+              />
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                style={{ height: '40pt' }}
+                color="secondary"
+                onClick={addSentence}
+              >
+                Agregar sentencia
+              </Button>
             </div>
             <div className="sentence-section">
               <RecordAudio title={'Hola'} name="audio1" />
@@ -322,6 +338,13 @@ export default function SignUp() {
             <div className="sentence-section">
               <RecordAudio title={'¿Ya comiste?'} name="audio8" />
             </div>
+              {
+                newSentences && newSentences.map((data, i) => (
+                  <div className="sentence-section">
+                    <RecordAudio title={data} name={`audio${9+i}`} />
+                  </div>
+                ))
+              }
             <Button
               type="submit"
               fullWidth
