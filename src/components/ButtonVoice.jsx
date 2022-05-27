@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 export default function ButtonVoice(props) {
+
+  const audRef = useRef();
+
   return (
     <div style={{width: '100%'}}>
       <Button
@@ -11,11 +14,13 @@ export default function ButtonVoice(props) {
         color="primary"
         fullWidth
         style={{width: '100%'}}
+        onClick={() => audRef.current.play()}
       >
         <Typography component="h1" variant="h4">
             {props.title}
         </Typography>
       </Button>
+      <audio ref={audRef} src={props.src} />
     </div>
   );
 }
