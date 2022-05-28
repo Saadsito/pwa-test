@@ -28,30 +28,11 @@ export const UserProvider = ({ children }) => {
           const audioData = [];
           try {
             console.log('iniciando carga');
-            audioData.push(
-              await getDownloadURL(ref(storage, `${user.uid}/audio1`))
-            );
-            audioData.push(
-              await getDownloadURL(ref(storage, `${user.uid}/audio2`))
-            );
-            audioData.push(
-              await getDownloadURL(ref(storage, `${user.uid}/audio3`))
-            );
-            audioData.push(
-              await getDownloadURL(ref(storage, `${user.uid}/audio4`))
-            );
-            audioData.push(
-              await getDownloadURL(ref(storage, `${user.uid}/audio5`))
-            );
-            audioData.push(
-              await getDownloadURL(ref(storage, `${user.uid}/audio6`))
-            );
-            audioData.push(
-              await getDownloadURL(ref(storage, `${user.uid}/audio7`))
-            );
-            audioData.push(
-              await getDownloadURL(ref(storage, `${user.uid}/audio8`))
-            );
+            for (let i = 1; i <= 8+userData.newAudios.length; i++) {
+              audioData.push(
+                await getDownloadURL(ref(storage, `${user.uid}/audio${i}`))
+              );
+            }
 
             setUser({ ...userData, audios: audioData });
           } catch (err) {

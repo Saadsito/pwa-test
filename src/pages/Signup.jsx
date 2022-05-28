@@ -120,6 +120,7 @@ export default function SignUp() {
         name: user.name,
         lastname: user.lastname,
         avatar: user.avatar,
+        newAudios: newSentences
       });
 
       //prueba blob
@@ -173,8 +174,10 @@ export default function SignUp() {
   };
 
   const addSentence = () => {
-    setNewSentences( [...newSentences, sentence]);
-    setSentence("");
+    if (sentence !== ""){
+      setNewSentences( [...newSentences, sentence]);
+      setSentence("");
+    }
   }
 
   return (
@@ -299,7 +302,7 @@ export default function SignUp() {
               <TextField
                 name="newSentence"
                 fullWidth
-                label="Agregar sentencia"
+                label="Sentencia"
                 value={sentence}
                 onChange={(e) => setSentence(e.target.value)}
               />

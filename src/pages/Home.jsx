@@ -70,6 +70,11 @@ export default function Home() {
           <ButtonVoice title={'¿Cómo estuvo tu día?'} src={user.audios[5]}/>
           <ButtonVoice title={'Te extraño'} src={user.audios[6]}/>
           <ButtonVoice title={'¿Ya comiste?'} src={user.audios[7]}/>
+          {
+            user.newAudios && user.newAudios.map((data, i) => (
+              <ButtonVoice title={data} src={user.audios[8+i]}/>
+            ))
+          }
           <Divider sx={{ width: '100%', margin: '20pt' }} />
           <Typography component="h1" variant="h3">
             Juegos
