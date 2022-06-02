@@ -25,6 +25,7 @@ import Memoria from '../assets/memoria.png';
 import Memoria2 from '../assets/memoria2.png';
 import Rompecabezas from '../assets/rompecabezas.png';
 import Solitario from '../assets/solitario.png';
+import CalendarComponent from '../components/CalendarComponent';
 
 export default function Home() {
 
@@ -95,6 +96,13 @@ export default function Home() {
             <div className='divFlex'>
               <Game img={Memoria2} link={"https://www.cokitos.com/juego-crear-y-memorizar-la-secuencia/play/"}/>
               <Game img={Damas} link={"https://www.cokitos.com/juego-damas-online/play/"}/>
+            </div>
+            <Divider sx={{ width: '100%', margin: '20pt' }} />
+            <Typography component="h1" variant="h3">
+              Calendario
+            </Typography>
+            <div className='container-games'>
+              <CalendarComponent/>
             </div>
           </div>
           <Button
