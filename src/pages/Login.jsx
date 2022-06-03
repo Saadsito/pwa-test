@@ -21,9 +21,11 @@ function Copyright(props) {
         align="center"
         {...props}
       >
-        Universidad Católica Andrés Bello <br /> Pontificia Universidad Católica
-        del Ecuador
+        <Link href="/handbook" variant="body2" color="#000" style={{marginTop: '10pt'}}>
+          {'Consula el manual de usuario aquí.'}
+        </Link>
       </Typography>
+      
     </div>
   );
 }

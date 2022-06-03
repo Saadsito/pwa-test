@@ -9,6 +9,7 @@ import SignUp from './pages/Signup';
 import Home from './pages/Home';
 import { UserProvider } from './states/useUser';
 import RecordAudio from './components/RecordAudio';
+import Handbook from './pages/Handbook';
 
 const theme = createTheme({
   palette: {
@@ -37,7 +38,9 @@ function App() {
               <Route exact path="/signup" element={<UnAuthRoute />}>
                 <Route exact path="/signup" element={<SignUp />} />
               </Route>
-              <Route exact path="/test" element={<RecordAudio />} />
+              <Route exact path="/handbook">
+                <Route exact path="/handbook" element={<Handbook />} />
+              </Route>
             </Routes>
           </Router>
         </UserProvider>

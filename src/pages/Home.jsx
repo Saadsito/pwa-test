@@ -26,6 +26,25 @@ import Memoria2 from '../assets/memoria2.png';
 import Rompecabezas from '../assets/rompecabezas.png';
 import Solitario from '../assets/solitario.png';
 import CalendarComponent from '../components/CalendarComponent';
+import Link from '@mui/material/Link';
+
+function Copyright(props) {
+  return (
+    <div>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        {...props}
+      >
+        <Link href="/handbook" variant="body2" color="#000" style={{margin: '10pt'}}>
+          {'Consula el manual de usuario aquí.'}
+        </Link>
+      </Typography>
+      
+    </div>
+  );
+}
 
 export default function Home() {
 
@@ -119,7 +138,7 @@ export default function Home() {
             Cerrar sesión
           </Button>
         </Box>
-          
+        <Copyright style={{margin: '30pt'}}/>
       </Container>
     </div>
   );
